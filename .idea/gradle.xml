@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="D:\android-studio\gradle\gradle-2.14.1" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Components" />
+            <option value="$PROJECT_DIR$/Components/bugly_crashreport_upgrade" />
+            <option value="$PROJECT_DIR$/Components/butterknife" />
+            <option value="$PROJECT_DIR$/Components/hotfix2" />
+            <option value="$PROJECT_DIR$/Components/leakcanary" />
+            <option value="$PROJECT_DIR$/Components/logger" />
+            <option value="$PROJECT_DIR$/Components/materialdialog" />
+            <option value="$PROJECT_DIR$/Components/permissions" />
+            <option value="$PROJECT_DIR$/Components/retrofit2" />
+            <option value="$PROJECT_DIR$/Components/rxjava1x" />
+            <option value="$PROJECT_DIR$/Librarys" />
+            <option value="$PROJECT_DIR$/Librarys/Commonlibs" />
+            <option value="$PROJECT_DIR$/Modules" />
+            <option value="$PROJECT_DIR$/Modules/usermodule" />
+            <option value="$PROJECT_DIR$/app" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

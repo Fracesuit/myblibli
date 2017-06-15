@@ -1,0 +1,9 @@
+include ':app', ':Librarys:Commonlibs', ':Components:materialdialog', ':Components:hotfix2',
+        ':Components:rxjava1x',
+        ':Components:retrofit2',
+        ':Components:logger',
+        ':Modules:usermodule',
+        ':Components:permissions',
+        ':Components:butterknife',
+        ':Components:bugly_crashreport_upgrade',
+        ':Components:leakcanary'
