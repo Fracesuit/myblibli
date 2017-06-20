@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 
 import com.dashi.fracesuit.commonlibs.utils.DialogUtils;
 import com.tbruyelle.rxpermissions.Permission;
@@ -19,17 +20,45 @@ public class PermissionsHelp {
     public static final int PERMISSION_REQUEST_CODE = 100;
     private static Boolean isFirst = true;
 
-    public interface OnPermissionCallBack {
-        void granted();
+    public interface OnRequestPermissionsBack {
+        void granted();//同意
+
+        void refuse();//拒绝
+
+        void completed();//完成，此处有可能是同意，有可能是拒绝
     }
 
-    public static void requestPermissions(final Activity activity, final OnPermissionCallBack onPermissionCallBack, String... permissions) {
-        RxPermissions rxPermissions = new RxPermissions(activity);
+    private static PermissionsHelp permissionsHelp;
+
+    private RxPermissions rxPermissions;
+
+    private PermissionsHelp(@NonNull Activity activity) {
+        rxPermissions = new RxPermissions(activity);
+    }
+
+    private PermissionsHelp() {
+        throw new IllegalArgumentException("必须使用带有一个参数的构造方法");
+    }
+
+    public static PermissionsHelp with(@NonNull Activity activity) {
+        if (permissionsHelp == null) {
+            synchronized (PermissionsHelp.class) {
+                if (permissionsHelp == null)
+                    permissionsHelp = new PermissionsHelp(activity);
+            }
+        }
+        return PermissionsHelp.permissionsHelp;
+    }
+
+    public void requestPermissions(final OnRequestPermissionsBack onRequestPermissionsBack, String... permissions) {
         rxPermissions.requestEach(permissions)
                 .subscribe(new Subscriber<Permission>() {
                     @Override
                     public void onCompleted() {
                         isFirst = true;
+                        if (onRequestPermissionsBack != null) {
+                            onRequestPermissionsBack.completed();
+                        }
                     }
 
                     @Override
@@ -40,8 +69,8 @@ public class PermissionsHelp {
                     @Override
                     public void onNext(Permission permission) {
                         if (permission.granted) {
-                            if (onPermissionCallBack != null) {
-                                onPermissionCallBack.granted();
+                            if (onRequestPermissionsBack != null) {
+                                onRequestPermissionsBack.granted();
                             }
                         } else if (permission.shouldShowRequestPermissionRationale) {//小米的这个永远是false
                             // Denied permission without ask never again
