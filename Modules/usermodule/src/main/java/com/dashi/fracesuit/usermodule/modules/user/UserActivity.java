@@ -7,13 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.dashi.fracesuit.commonlibs.base.mvp.RxMvpBaseActivity;
+import com.dashi.fracesuit.commonlibs.base.mvp.BaseActivity;
 import com.dashi.fracesuit.usermodule.R;
 import com.dashi.fracesuit.usermodule.R2;
 import com.dashi.fracesuit.usermodule.modle.User;
 import com.dashi.fracesuit.usermodule.modle.User2;
 import com.trello.rxlifecycle.LifecycleTransformer;
-import com.trello.rxlifecycle.android.ActivityEvent;
 
 import butterknife.BindView;
 
@@ -22,7 +21,7 @@ import butterknife.BindView;
  * 邮箱 784787081@qq.com
  */
 
-public class UserActivity extends RxMvpBaseActivity<UserContract.UserView, UserPresenter> implements UserContract.UserView, View.OnClickListener {
+public class UserActivity extends BaseActivity<UserContract.UserView, UserPresenter> implements UserContract.UserView, View.OnClickListener {
     @BindView(R2.id.tv_name)
     TextView tvName;
     @BindView(R2.id.tv_age)
@@ -51,7 +50,9 @@ public class UserActivity extends RxMvpBaseActivity<UserContract.UserView, UserP
 
     @Override
     public LifecycleTransformer bindLifecycle(Class clazz) {
-        return this.bindUntilEvent(ActivityEvent.DESTROY);
+        // return this.bindUntilEvent(ActivityEvent.DESTROY);
+        // return this.bindLifecycle(clazz);
+        return this.bindToLifecycle();
     }
 
     @Override
@@ -61,8 +62,13 @@ public class UserActivity extends RxMvpBaseActivity<UserContract.UserView, UserP
     }
 
     @Override
-    public String[] getPermissions() {
-        return new String[0];
+    protected void init() {
+
+    }
+
+    @Override
+    protected void requestPermissions() {
+
     }
 
     @Override
@@ -101,7 +107,6 @@ public class UserActivity extends RxMvpBaseActivity<UserContract.UserView, UserP
             mPresenter.cancel();
         }
     }
-
 
 
 }

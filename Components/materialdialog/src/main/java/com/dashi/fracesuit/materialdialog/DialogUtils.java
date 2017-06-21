@@ -1,4 +1,4 @@
-package com.dashi.fracesuit.commonlibs.utils;
+package com.dashi.fracesuit.materialdialog;
 
 import android.app.Activity;
 import android.content.DialogInterface;

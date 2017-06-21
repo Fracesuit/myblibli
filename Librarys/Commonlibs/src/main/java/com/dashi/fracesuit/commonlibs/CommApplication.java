@@ -18,8 +18,12 @@ public class CommApplication {
 
     public static void init(Application application, Boolean isDebug) {
         context = application;
+
+        //网络
         retrofitHelper = RetrofitApplication.init(application, isDebug, null);
         RxjavaApplication.init(application, isDebug);
-        LoggerApplication.init("REN", isDebug);
+
+        //日志
+        LoggerApplication.init("CommonLog", isDebug);
     }
 }

@@ -8,12 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.dashi.fracesuit.commonlibs.base.mvp.RxMvpBaseActivity;
+import com.dashi.fracesuit.commonlibs.base.mvp.BaseActivity;
 import com.dashi.fracesuit.myblibli.R;
 import com.dashi.fracesuit.myblibli.hotfix.bottombar.BaseAdapter;
 import com.dashi.fracesuit.myblibli.hotfix.bottombar.BottomBar;
 import com.dashi.fracesuit.myblibli.hotfix.bottombar.BottomBarTab;
 import com.dashi.fracesuit.myblibli.hotfix.bottombar.OnBottomTabSelectedListener;
+import com.dashi.fracesuit.permissions.PermissionsHelp;
 import com.dashi.fracesuit.usermodule.modules.user.UserActivity;
 
 import butterknife.BindView;
@@ -24,7 +25,7 @@ import butterknife.BindView;
  * 邮箱 784787081@qq.com
  */
 
-public class MainActivity extends RxMvpBaseActivity<MainContract.MainView, MainPresenter> implements MainContract.MainView {
+public class MainActivity extends BaseActivity<MainContract.MainView, MainPresenter> implements MainContract.MainView {
     @BindView(R.id.go)
     TextView go;
     @BindView(R.id.btn)
@@ -39,9 +40,46 @@ public class MainActivity extends RxMvpBaseActivity<MainContract.MainView, MainP
     }
 
     @Override
+    protected void init() {
+
+    }
+
+    @Override
+    protected void requestPermissions() {
+        PermissionsHelp.with(this).requestPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE);
+        /*PermissionsHelp.with(this).requestPermissions(
+                new OnRequestPermissionsListener() {
+                    @Override
+                    public void grant(Permission permission, boolean granted) {
+                        if (granted) {
+                            LogUtils.d("granted");
+                        } else {
+                            LogUtils.d("refuse");
+                        }
+                    }
+
+                    @Override
+                    public void completed() {
+                        LogUtils.d("completed");
+                    }
+
+                    @Override
+                    public void error(Throwable e) {
+                        LogUtils.d("error");
+                    }
+                }
+                , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE
+               *//* , new PermissionModel(Manifest.permission.WRITE_EXTERNAL_STORAGE, "提示信息,存储权限", true)
+                , new PermissionModel(Manifest.permission.READ_PHONE_STATE, "提示信息，电话权限", true)
+                , new PermissionModel(Manifest.permission.ACCESS_FINE_LOCATION, "提示信息，位置权限", false)*//*
+        );*/
+
+    }
+
+   /* @Override
     public String[] getPermissions() {
         return new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE};
-    }
+    }*/
 
     @Override
     public void initViews(Bundle savedInstanceState) {
@@ -55,7 +93,7 @@ public class MainActivity extends RxMvpBaseActivity<MainContract.MainView, MainP
             public void onClick(View v) {
                 /*Intent intent = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(intent);*/
-                int i=1/0;
+                int i = 1 / 0;
             }
         });
 

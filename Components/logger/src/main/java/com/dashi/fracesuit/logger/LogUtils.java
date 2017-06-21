@@ -1,4 +1,4 @@
-package com.dashi.fracesuit.commonlibs.utils;
+package com.dashi.fracesuit.logger;
 
 import com.orhanobut.logger.Logger;
 
@@ -7,6 +7,7 @@ import com.orhanobut.logger.Logger;
  */
 
 public class LogUtils {
+
     public static void d(String msg) {
         Logger.d(msg);
     }

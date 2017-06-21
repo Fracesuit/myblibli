@@ -9,11 +9,10 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 
 import com.dashi.fracesuit.commonlibs.CommApplication;
-import com.dashi.fracesuit.commonlibs.help.PermissionsHelp;
-import com.dashi.fracesuit.commonlibs.utils.LogUtils;
 import com.dashi.fracesuit.commonlibs.utils.ToastUtils;
+import com.dashi.fracesuit.logger.LogUtils;
+import com.dashi.fracesuit.permissions.PermissionsHelp;
 import com.trello.rxlifecycle.LifecycleTransformer;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -21,7 +20,7 @@ import butterknife.Unbinder;
 /**
  * Activity基类
  */
-public abstract class RxBaseActivity<V extends BaseView, T extends BasePresenterImpl<V>> extends RxAppCompatActivity implements BaseView {
+public abstract class BaseMvpAndRxLifecycleActivity<V extends BaseView, T extends BasePresenterImpl<V>> extends BaseMvpActivity<V,T> implements BaseView {
 
     private Unbinder bind;
 
@@ -34,10 +33,8 @@ public abstract class RxBaseActivity<V extends BaseView, T extends BasePresenter
         bind = ButterKnife.bind(this);
         //初始化
         init();
-
         //动态权限
         requestPermissions();
-
         //初始化控件
         initViews(savedInstanceState);
 
@@ -55,14 +52,13 @@ public abstract class RxBaseActivity<V extends BaseView, T extends BasePresenter
     @LayoutRes
     public abstract int getLayoutId();
 
-    protected void init() {
-    }
+    protected abstract void init();
 
-    public abstract String[] getPermissions();
+    protected abstract void requestPermissions();
 
-    public abstract void initViews(Bundle savedInstanceState);
+    protected abstract void initViews(Bundle savedInstanceState);
 
-    public void initToolBar() {
+    protected void initToolBar() {
     }
 
     protected abstract void initListener();
@@ -78,7 +74,7 @@ public abstract class RxBaseActivity<V extends BaseView, T extends BasePresenter
     //==========================等待框start==========================
     ProgressDialog mProgressDialog;
 
-    public void showProgressBar() {
+    protected void showProgressBar() {
         if (mProgressDialog == null) {
             mProgressDialog = ProgressDialog.show(this, null, "请稍后...", true, true);
         }
@@ -158,15 +154,6 @@ public abstract class RxBaseActivity<V extends BaseView, T extends BasePresenter
         LogUtils.d("onDestroy");
         super.onDestroy();
 
-    }
-
-    protected void requestPermissions() {
-        String[] permissions = getPermissions();
-        if (permissions != null && permissions.length > 0) {
-            PermissionsHelp.requestPermissions(this,
-                    null,
-                    permissions);
-        }
     }
 
     @Override

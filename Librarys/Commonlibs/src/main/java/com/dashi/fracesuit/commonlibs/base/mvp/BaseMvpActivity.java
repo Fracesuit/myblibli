@@ -1,24 +1,40 @@
 package com.dashi.fracesuit.commonlibs.base.mvp;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
 
-import com.dashi.fracesuit.commonlibs.utils.LogUtils;
+import com.dashi.fracesuit.logger.LogUtils;
 
 import java.lang.reflect.ParameterizedType;
 
+/**
+ * Activity基类
+ */
+public abstract class BaseMvpActivity<V extends BaseView, T extends BasePresenterImpl<V>> extends BaseRxLifecycleActivity {
 
-public abstract class MVPBaseActivity<V extends BaseView, T extends BasePresenterImpl<V>> extends AppCompatActivity implements BaseView {
+    @NonNull
     public T mPresenter;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupMvp();
+    }
+
+    private void setupMvp() {
         mPresenter = getInstance(this, 1);
         mPresenter.attachView((V) this);
     }
+
+    public <T> T getInstance(Object o, int i) {
+        try {
+            return ((Class<T>) ((ParameterizedType) (o.getClass().getGenericSuperclass())).getActualTypeArguments()[i]).newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     //========================activity相关start===============================
     @Override
@@ -49,24 +65,4 @@ public abstract class MVPBaseActivity<V extends BaseView, T extends BasePresente
         super.onDestroy();
     }
     //========================activity相关end===============================
-
-    @Override
-    public Context getContext() {
-        return this;
-    }
-
-    public <T> T getInstance(Object o, int i) {
-        try {
-            return ((Class<T>) ((ParameterizedType) (o.getClass()
-                    .getGenericSuperclass())).getActualTypeArguments()[i])
-                    .newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (ClassCastException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }
