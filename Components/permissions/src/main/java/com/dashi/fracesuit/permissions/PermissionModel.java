@@ -10,7 +10,6 @@ public class PermissionModel {
     private String remindContent;
     private String androidPermission;
     private boolean must;
-
     public Permission permission;
 
     public PermissionModel(String androidPermission, String remindContent, boolean must) {
