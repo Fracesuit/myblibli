@@ -6,6 +6,10 @@ public interface BasePresenter<V extends BaseView> {
 
     void detachView();
 
+    void onStart();
+
+    void onCreate();
+
     void onResume();
 
     void onPause();

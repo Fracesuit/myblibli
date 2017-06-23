@@ -15,6 +15,14 @@ public  class BasePresenterImpl<V extends BaseView> implements BasePresenter<V>{
     public void detachView() {
         mView=null;
     }
+    @Override
+    public void onStart() {
+
+    }
+    @Override
+    public void onCreate() {
+
+    }
 
     @Override
     public void onResume() {
