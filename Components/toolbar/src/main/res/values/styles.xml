@@ -1,0 +1,19 @@
+<resources>
+    <!--溢出菜单样式-->
+    <style name="ToolbarPopupTheme" parent="@style/ThemeOverlay.AppCompat.Light">
+        <!--菜单背景-->
+        <!--  <item name="android:popupBackground">#33000000</item>-->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuPositionStyle</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
+
+    </style>
+
+    <!--溢出菜单位置-->
+    <style name="OverflowMenuPositionStyle" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownVerticalOffset">5dip</item>
+        <item name="android:dropDownHorizontalOffset">0dip</item>
+    </style>
+</resources>

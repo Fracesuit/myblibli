@@ -17,6 +17,7 @@
       <module fileurl="file://$PROJECT_DIR$/Components/permissions/permissions.iml" filepath="$PROJECT_DIR$/Components/permissions/permissions.iml" />
       <module fileurl="file://$PROJECT_DIR$/Components/retrofit2/retrofit2.iml" filepath="$PROJECT_DIR$/Components/retrofit2/retrofit2.iml" />
       <module fileurl="file://$PROJECT_DIR$/Components/rxjava1x/rxjava1x.iml" filepath="$PROJECT_DIR$/Components/rxjava1x/rxjava1x.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Components/toolbar/toolbar.iml" filepath="$PROJECT_DIR$/Components/toolbar/toolbar.iml" />
       <module fileurl="file://$PROJECT_DIR$/Modules/usermodule/usermodule.iml" filepath="$PROJECT_DIR$/Modules/usermodule/usermodule.iml" />
     </modules>
   </component>

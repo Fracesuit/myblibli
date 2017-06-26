@@ -33,6 +33,7 @@ public abstract class DefaultSubscriber<T> extends Subscriber<T> {
 
     protected LifecycleTransformer<T> bindLifecycle()//绑定生命周期,获取泛型的实际类型
     {
+        //根据不同的泛型,来取消对应的接口
         Class<T> clazz = ((Class<T>) ((ParameterizedType) (this.getClass().getGenericSuperclass())).getActualTypeArguments()[0]);
         return mView.bindLifecycle(clazz);
     }

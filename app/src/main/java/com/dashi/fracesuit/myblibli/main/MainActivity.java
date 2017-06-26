@@ -87,6 +87,13 @@ public class MainActivity extends BaseActivity<MainContract.MainView, MainPresen
     }
 
     @Override
+    protected void initToolBar() {
+        toolbar.supportBack()
+                .titleCenter("dd")
+                .inflateMenu(R.menu.menu);
+    }
+
+    @Override
     protected void initListener() {
         go.setOnClickListener(new View.OnClickListener() {
             @Override

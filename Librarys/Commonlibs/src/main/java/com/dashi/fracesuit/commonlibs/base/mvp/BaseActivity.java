@@ -12,9 +12,11 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 
 import com.dashi.fracesuit.commonlibs.CommApplication;
+import com.dashi.fracesuit.commonlibs.R;
 import com.dashi.fracesuit.commonlibs.utils.ToastUtils;
 import com.dashi.fracesuit.logger.LogUtils;
 import com.dashi.fracesuit.permissions.PermissionsHelp;
+import com.dashi.fracesuit.toolbar.AwesomeToolbar;
 import com.trello.rxlifecycle.LifecycleProvider;
 import com.trello.rxlifecycle.LifecycleTransformer;
 import com.trello.rxlifecycle.RxLifecycle;
@@ -32,11 +34,17 @@ import rx.subjects.BehaviorSubject;
  * Activity基类
  */
 public abstract class BaseActivity<V extends BaseView, T extends BasePresenterImpl<V>> extends AppCompatActivity implements LifecycleProvider<ActivityEvent>, BaseView {
-
     private final String TAG = this.getClass().getSimpleName();
-    private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
+
+    //公共view
+    public AwesomeToolbar toolbar;
+
+    //mvp
     @NonNull
     public T mPresenter;
+
+    //rx生命周期管控
+    private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
 
     @Override
     @NonNull
@@ -65,7 +73,7 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
         mPresenter.attachView((V) this);
     }
 
-    public <T> T getInstance(Object o, int i) {
+    private <T> T getInstance(Object o, int i) {
         try {
             return ((Class<T>) ((ParameterizedType) (o.getClass().getGenericSuperclass())).getActualTypeArguments()[i]).newInstance();
         } catch (Exception e) {
@@ -94,7 +102,11 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
         initViews(savedInstanceState);
 
         //初始化ToolBar
-        initToolBar();
+        toolbar = (AwesomeToolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            toolbar.with(this);
+            initToolBar();
+        }
 
         //初始化监听
         initListener();
@@ -105,7 +117,7 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
 
 
     @LayoutRes
-    public abstract int getLayoutId();
+    protected abstract int getLayoutId();
 
     protected abstract void init();
 
@@ -113,8 +125,7 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
 
     protected abstract void initViews(Bundle savedInstanceState);
 
-    protected void initToolBar() {
-    }
+    protected abstract void initToolBar();
 
     protected abstract void initListener();
 

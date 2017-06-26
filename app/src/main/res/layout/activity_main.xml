@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="@dimen/activity_vertical_margin">
-
+    <include layout="@layout/toolbar"></include>
     <TextView
         android:id="@+id/go"
         android:layout_width="match_parent"

@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/toolbar"></include>
+
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
@@ -21,18 +23,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="获取111--更新" />
+
     <Button
         android:id="@+id/btn_get2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="获取2--更新" />
+
     <Button
         android:id="@+id/btn_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="取消444" />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="没有用的11112222" />
+
+    <Button
+        android:id="@+id/btn_cancel1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="5555555555555" />
+
 </LinearLayout>

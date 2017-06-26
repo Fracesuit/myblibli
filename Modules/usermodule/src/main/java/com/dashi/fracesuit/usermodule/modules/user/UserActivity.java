@@ -13,6 +13,7 @@ import com.dashi.fracesuit.usermodule.R2;
 import com.dashi.fracesuit.usermodule.modle.User;
 import com.dashi.fracesuit.usermodule.modle.User2;
 import com.trello.rxlifecycle.LifecycleTransformer;
+import com.trello.rxlifecycle.android.ActivityEvent;
 
 import butterknife.BindView;
 
@@ -24,8 +25,9 @@ import butterknife.BindView;
 public class UserActivity extends BaseActivity<UserContract.UserView, UserPresenter> implements UserContract.UserView, View.OnClickListener {
     @BindView(R2.id.tv_name)
     TextView tvName;
+
     @BindView(R2.id.tv_age)
-    TextView tvAge;
+    public TextView tvAge;
 
     @BindView(R2.id.btn_get)
     Button btnGet;
@@ -33,6 +35,9 @@ public class UserActivity extends BaseActivity<UserContract.UserView, UserPresen
     Button btnGet2;
     @BindView(R2.id.btn_cancel)
     Button btnCncel;
+
+    @BindView(R2.id.btn_cancel1)
+    Button btnCncel1;
 
 
     @Override
@@ -45,15 +50,28 @@ public class UserActivity extends BaseActivity<UserContract.UserView, UserPresen
 
     @Override
     protected void initData() {
-
+        btnCncel1.setText("dddef");
     }
 
     @Override
     public LifecycleTransformer bindLifecycle(Class clazz) {
+        if (User.class == clazz) {
+            return this.bindUntilEvent(ActivityEvent.DESTROY);
+        } else if (User2.class == clazz) {
+            return super.bindLifecycle(clazz);
+        } else {
+            return this.bindToLifecycle();
+        }
         // return this.bindUntilEvent(ActivityEvent.DESTROY);
-        // return this.bindLifecycle(clazz);
-        return this.bindToLifecycle();
+        //return this.bindLifecycle(clazz);
+        //return this.bindToLifecycle();
     }
+    /*@Override
+    public LifecycleTransformer bindLifecycle() {
+        // return this.bindUntilEvent(ActivityEvent.DESTROY);
+        //return this.bindLifecycle(clazz);
+        return this.bindToLifecycle();
+    }*/
 
     @Override
     @LayoutRes
@@ -74,6 +92,11 @@ public class UserActivity extends BaseActivity<UserContract.UserView, UserPresen
     @Override
     public void initViews(Bundle savedInstanceState) {
 
+    }
+
+    @Override
+    protected void initToolBar() {
+        toolbar.supportBack();
     }
 
     @Override
@@ -107,6 +130,5 @@ public class UserActivity extends BaseActivity<UserContract.UserView, UserPresen
             mPresenter.cancel();
         }
     }
-
 
 }
