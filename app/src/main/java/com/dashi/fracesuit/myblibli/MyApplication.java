@@ -2,7 +2,7 @@ package com.dashi.fracesuit.myblibli;
 
 import android.app.Application;
 
-import com.dashi.fracesuit.bugly.BugluApplication;
+import com.dashi.fracesuit.bugly.BuglyApplication;
 import com.dashi.fracesuit.commonlibs.CommApplication;
 import com.dashi.fracesuit.hotfix2.HotfixApplication;
 import com.dashi.fracesuit.leakcanary.LeakcanaryApplication;
@@ -26,6 +26,6 @@ public class MyApplication extends Application {
         HotfixApplication.init(this, BuildConfig.VERSION_NAME, BuildConfig.DEBUG);
 
         //crash和自动更新
-        BugluApplication.init(this, BuildConfig.DEBUG);
+        BuglyApplication.init(this, BuildConfig.DEBUG);
     }
 }

@@ -1,4 +1,6 @@
-include ':app', ':Librarys:Commonlibs', ':Components:materialdialog', ':Components:hotfix2', ':Components:toolbar',
+include ':app', ':Librarys:Commonlibs', ':Components:materialdialog',
+        ':Components:hotfix2',
+        ':Components:toolbar',
         ':Components:rxjava1x',
         ':Components:retrofit2',
         ':Components:logger',

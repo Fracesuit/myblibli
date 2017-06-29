@@ -7,3 +7,7 @@
 /build
 /captures
 .externalNativeBuild
+.idea/modules.xml
+.idea/vcs.xml
+hs_err_pid4112.log
+replay_pid4112.log

@@ -90,7 +90,7 @@ public class UserActivity extends BaseActivity<UserContract.UserView, UserPresen
     }
 
     @Override
-    public void initViews(Bundle savedInstanceState) {
+    public void initView(Bundle savedInstanceState) {
 
     }
 

@@ -100,14 +100,6 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
         requestPermissions();
         //初始化控件
         initViews(savedInstanceState);
-
-        //初始化ToolBar
-        toolbar = (AwesomeToolbar) findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            toolbar.with(this);
-            initToolBar();
-        }
-
         //初始化监听
         initListener();
 
@@ -123,7 +115,17 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
 
     protected abstract void requestPermissions();
 
-    protected abstract void initViews(Bundle savedInstanceState);
+    protected void initViews(Bundle savedInstanceState) {
+        initView(savedInstanceState);
+        //初始化ToolBar
+        toolbar = (AwesomeToolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            toolbar.with(this);
+            initToolBar();
+        }
+    }
+
+    protected abstract void initView(Bundle savedInstanceState);
 
     protected abstract void initToolBar();
 

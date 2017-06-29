@@ -76,13 +76,9 @@ public class MainActivity extends BaseActivity<MainContract.MainView, MainPresen
 
     }
 
-   /* @Override
-    public String[] getPermissions() {
-        return new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE};
-    }*/
 
     @Override
-    public void initViews(Bundle savedInstanceState) {
+    public void initView(Bundle savedInstanceState) {
 
     }
 
