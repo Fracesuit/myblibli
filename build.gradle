@@ -15,7 +15,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-
+        maven { url "https://jitpack.io" }
         //热更新
         maven {
             url "http://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories"

@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/Components/logger" />
             <option value="$PROJECT_DIR$/Components/materialdialog" />
             <option value="$PROJECT_DIR$/Components/permissions" />
+            <option value="$PROJECT_DIR$/Components/recycleview" />
             <option value="$PROJECT_DIR$/Components/retrofit2" />
             <option value="$PROJECT_DIR$/Components/rxjava1x" />
             <option value="$PROJECT_DIR$/Components/toolbar" />

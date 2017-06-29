@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/Components/Components.iml" filepath="$PROJECT_DIR$/Components/Components.iml" />
       <module fileurl="file://$PROJECT_DIR$/Librarys/Librarys.iml" filepath="$PROJECT_DIR$/Librarys/Librarys.iml" />
       <module fileurl="file://$PROJECT_DIR$/Modules/Modules.iml" filepath="$PROJECT_DIR$/Modules/Modules.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyBlibli.iml" filepath="$PROJECT_DIR$/MyBlibli.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/Components/bugly_crashreport_upgrade/bugly_crashreport_upgrade.iml" filepath="$PROJECT_DIR$/Components/bugly_crashreport_upgrade/bugly_crashreport_upgrade.iml" />
       <module fileurl="file://$PROJECT_DIR$/Components/butterknife/butterknife.iml" filepath="$PROJECT_DIR$/Components/butterknife/butterknife.iml" />
@@ -13,8 +14,8 @@
       <module fileurl="file://$PROJECT_DIR$/Components/leakcanary/leakcanary.iml" filepath="$PROJECT_DIR$/Components/leakcanary/leakcanary.iml" />
       <module fileurl="file://$PROJECT_DIR$/Components/logger/logger.iml" filepath="$PROJECT_DIR$/Components/logger/logger.iml" />
       <module fileurl="file://$PROJECT_DIR$/Components/materialdialog/materialdialog.iml" filepath="$PROJECT_DIR$/Components/materialdialog/materialdialog.iml" />
-      <module fileurl="file://$PROJECT_DIR$/myblibli.iml" filepath="$PROJECT_DIR$/myblibli.iml" />
       <module fileurl="file://$PROJECT_DIR$/Components/permissions/permissions.iml" filepath="$PROJECT_DIR$/Components/permissions/permissions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Components/recycleview/recycleview.iml" filepath="$PROJECT_DIR$/Components/recycleview/recycleview.iml" />
       <module fileurl="file://$PROJECT_DIR$/Components/retrofit2/retrofit2.iml" filepath="$PROJECT_DIR$/Components/retrofit2/retrofit2.iml" />
       <module fileurl="file://$PROJECT_DIR$/Components/rxjava1x/rxjava1x.iml" filepath="$PROJECT_DIR$/Components/rxjava1x/rxjava1x.iml" />
       <module fileurl="file://$PROJECT_DIR$/Components/toolbar/toolbar.iml" filepath="$PROJECT_DIR$/Components/toolbar/toolbar.iml" />
