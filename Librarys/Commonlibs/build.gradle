@@ -29,6 +29,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
     testCompile 'junit:junit:4.12'
     compile project(':Components:retrofit2')
     compile project(':Components:rxjava1x')
@@ -43,4 +44,6 @@ dependencies {
     compile project(':Components:toolbar')
     //控件注解(凡是用到的地方都要这个注解)
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    compile project(':Components:recycleview')
+
 }

@@ -1,7 +1,6 @@
 package com.dashi.fracesuit.commonlibs.base.mvp;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 
-import com.dashi.fracesuit.commonlibs.CommApplication;
 import com.dashi.fracesuit.commonlibs.R;
 import com.dashi.fracesuit.commonlibs.utils.ToastUtils;
 import com.dashi.fracesuit.logger.LogUtils;
@@ -133,12 +131,6 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
 
     protected abstract void initData();
 
-
-    @Override
-    public Context getContext() {
-        return CommApplication.context;
-    }
-
     //==========================等待框start==========================
     ProgressDialog mProgressDialog;
 
@@ -193,7 +185,6 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
     @Override
     public void doOnCancel() {
         hideProgressBar();
-        // toast("任务取消了");
         LogUtils.d("任务取消了");
     }
 
