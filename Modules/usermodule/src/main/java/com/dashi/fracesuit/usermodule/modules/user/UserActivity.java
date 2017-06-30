@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.dashi.fracesuit.commonlibs.base.mvp.BaseActivity;
+import com.dashi.fracesuit.commonlibs.base.BaseActivity;
 import com.dashi.fracesuit.usermodule.R;
 import com.dashi.fracesuit.usermodule.R2;
 import com.dashi.fracesuit.usermodule.modle.User;

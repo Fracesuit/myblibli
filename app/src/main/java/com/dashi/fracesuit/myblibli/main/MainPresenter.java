@@ -1,6 +1,6 @@
 package com.dashi.fracesuit.myblibli.main;
 
-import com.dashi.fracesuit.commonlibs.base.mvp.BasePresenterImpl;
+import com.dashi.fracesuit.commonlibs.base.BasePresenter;
 
 
 /**
@@ -8,6 +8,6 @@ import com.dashi.fracesuit.commonlibs.base.mvp.BasePresenterImpl;
  *  邮箱 784787081@qq.com
  */
 
-public class MainPresenter extends BasePresenterImpl<MainContract.MainView> implements MainContract.Presenter{
+public class MainPresenter extends BasePresenter<MainContract.MainView> implements MainContract.Presenter{
     
 }

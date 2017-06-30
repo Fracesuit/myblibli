@@ -1,22 +1,18 @@
-package com.dashi.fracesuit.commonlibs.base;
+package com.dashi.fracesuit.commonlibs.base.list;
 
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 
 import com.dashi.fracesuit.commonlibs.R;
-import com.dashi.fracesuit.commonlibs.base.mvp.BaseActivity;
-import com.dashi.fracesuit.commonlibs.base.mvp.BaseListView;
-import com.dashi.fracesuit.commonlibs.base.mvp.BasePresenterImpl;
-import com.dashi.fracesuit.commonlibs.base.mvp.BaseView;
+import com.dashi.fracesuit.commonlibs.base.BaseActivity;
+import com.dashi.fracesuit.commonlibs.base.BasePresenter;
+import com.dashi.fracesuit.commonlibs.base.BaseView;
 
 /**
  * Created by Fracesuit on 2017/6/29.
  */
 
-public class BaseListActivity<V extends BaseListView, T extends BasePresenterImpl<V>> extends BaseActivity<V, T> implements  BaseListView{
-
+public abstract class BaseListActivity<DATA, T extends BaseListPresenter<DATA>> extends BaseActivity<BaseView<DATA>, BasePresenter<BaseView<DATA>>> implements BaseView {
     @Override
-    @LayoutRes
     protected int getLayoutId() {
         return R.layout.activity_recycleview;
     }

@@ -6,14 +6,16 @@ import com.trello.rxlifecycle.LifecycleTransformer;
  * MVPPlugin
  */
 
-public interface RxBaseView<T> {
-    void doOnStart();
+public interface RxBaseView {
+    void doOnStart(int requestCode);
 
-    void doOnCancel();
+    void doOnCancel(int requestCode);
 
-    void doOnError(String msg);
+    void doOnError(int requestCode, String msg);
 
-    void onCompleted();
+    void onCompleted(int requestCode);
 
-    LifecycleTransformer bindLifecycle(Class clazz);
+    LifecycleTransformer bindLifecycle(int requestCode);
+
+
 }

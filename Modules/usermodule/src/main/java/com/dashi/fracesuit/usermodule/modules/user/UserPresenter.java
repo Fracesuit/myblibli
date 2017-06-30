@@ -1,6 +1,7 @@
 package com.dashi.fracesuit.usermodule.modules.user;
 
-import com.dashi.fracesuit.commonlibs.base.mvp.BasePresenterImpl;
+import com.dashi.fracesuit.commonlibs.base.BasePresenter;
+import com.dashi.fracesuit.commonlibs.base.BaseView;
 import com.dashi.fracesuit.rxjava1x.interator.DefaultSubscriber;
 import com.dashi.fracesuit.usermodule.data.repository.User2Repository;
 import com.dashi.fracesuit.usermodule.data.repository.UserRepository;
@@ -14,7 +15,7 @@ import com.dashi.fracesuit.usermodule.modle.User2;
  * MVPPlugin
  */
 
-public class UserPresenter extends BasePresenterImpl<UserContract.UserView> implements UserContract.Presenter {
+public class UserPresenter extends BasePresenter<BaseView<>> {
     private UserInterator userInterator;
     private User2Interator user2Interator;
 
@@ -29,17 +30,16 @@ public class UserPresenter extends BasePresenterImpl<UserContract.UserView> impl
     }
 
     public void get() {
-        userInterator.execute(new DefaultSubscriber<User>(mView) {
+        userInterator.execute(new DefaultSubscriber<User>(mView, 100) {
             @Override
             public void onNext(User user) {
-                mView.getUserSuccess(user);
+                mView.parseData(user);
             }
         }, null);
     }
 
-    @Override
     public void get2() {
-        user2Interator.execute(new DefaultSubscriber<User2>(mView) {
+        user2Interator.execute(new DefaultSubscriber<User2>(mView, 200) {
             @Override
             public void onNext(User2 user2) {
 
@@ -48,9 +48,9 @@ public class UserPresenter extends BasePresenterImpl<UserContract.UserView> impl
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void destroy() {
         user2Interator.unCompositeSubscription();
         userInterator.unCompositeSubscription();
+        super.destroy();
     }
 }

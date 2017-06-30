@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import com.dashi.fracesuit.rxjava1x.RxjavaApplication;
 import com.trello.rxlifecycle.LifecycleTransformer;
 
-import java.lang.reflect.ParameterizedType;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -18,39 +17,38 @@ import rx.Subscriber;
  */
 
 public abstract class DefaultSubscriber<T> extends Subscriber<T> {
-    RxBaseView<T> mView;
+    RxBaseView mView;
+    int mRequestCode;
+
+    public DefaultSubscriber(@NonNull RxBaseView view, int requestCode) {
+        mView = view;
+        mRequestCode = requestCode;
+    }
 
     protected void doOnStart()//开始
     {
-        mView.doOnStart();
+        mView.doOnStart(mRequestCode);
     }
 
     protected void doOnCancel()//取消
     {
-        mView.doOnCancel();
+        mView.doOnCancel(mRequestCode);
         mView = null;
     }
 
     protected LifecycleTransformer<T> bindLifecycle()//绑定生命周期,获取泛型的实际类型
     {
-        //根据不同的泛型,来取消对应的接口
-        Class<T> clazz = ((Class<T>) ((ParameterizedType) (this.getClass().getGenericSuperclass())).getActualTypeArguments()[0]);
-        return mView.bindLifecycle(clazz);
+        return mView.bindLifecycle(mRequestCode);
     }
 
     protected void doOnError(Throwable e, String msg)//错误的时候
     {
-        mView.doOnError(msg);
+        mView.doOnError(mRequestCode, msg);
     }
 
     @Override
     public void onCompleted() {
-        mView.onCompleted();
-    }
-
-
-    public DefaultSubscriber(@NonNull RxBaseView view) {
-        mView = view;
+        mView.onCompleted(mRequestCode);
     }
 
 

@@ -1,4 +1,4 @@
-package com.dashi.fracesuit.commonlibs.base.mvp;
+package com.dashi.fracesuit.commonlibs.base;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -14,6 +14,7 @@ import com.dashi.fracesuit.commonlibs.R;
 import com.dashi.fracesuit.commonlibs.utils.ToastUtils;
 import com.dashi.fracesuit.logger.LogUtils;
 import com.dashi.fracesuit.permissions.PermissionsHelp;
+import com.dashi.fracesuit.rxjava1x.interator.RxBaseView;
 import com.dashi.fracesuit.toolbar.AwesomeToolbar;
 import com.trello.rxlifecycle.LifecycleProvider;
 import com.trello.rxlifecycle.LifecycleTransformer;
@@ -29,9 +30,10 @@ import rx.Observable;
 import rx.subjects.BehaviorSubject;
 
 /**
- * Activity基类
+ * Created by Fracesuit on 2017/6/29.
  */
-public abstract class BaseActivity<V extends BaseView, T extends BasePresenterImpl<V>> extends AppCompatActivity implements LifecycleProvider<ActivityEvent>, BaseView {
+
+public abstract class BaseActivity<V extends RxBaseView, T extends BasePresenter<V>> extends AppCompatActivity implements LifecycleProvider<ActivityEvent>, RxBaseView {
     private final String TAG = this.getClass().getSimpleName();
 
     //公共view
@@ -40,46 +42,6 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
     //mvp
     @NonNull
     public T mPresenter;
-
-    //rx生命周期管控
-    private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
-
-    @Override
-    @NonNull
-    @CheckResult
-    public final Observable<ActivityEvent> lifecycle() {
-        return lifecycleSubject.asObservable();
-    }
-
-    @Override
-    @NonNull
-    @CheckResult
-    public final <P> LifecycleTransformer<P> bindUntilEvent(@NonNull ActivityEvent event) {
-        return RxLifecycle.bindUntilEvent(lifecycleSubject, event);
-    }
-
-    @Override
-    @NonNull
-    @CheckResult
-    public final <P> LifecycleTransformer<P> bindToLifecycle() {
-        return RxLifecycleAndroid.bindActivity(lifecycleSubject);
-    }
-
-
-    private void setupMvp() {
-        mPresenter = getInstance(this, 1);
-        mPresenter.attachView((V) this);
-    }
-
-    private <T> T getInstance(Object o, int i) {
-        try {
-            return ((Class<T>) ((ParameterizedType) (o.getClass().getGenericSuperclass())).getActualTypeArguments()[i]).newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     private Unbinder bind;
 
     @Override
@@ -92,10 +54,15 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
         setContentView(getLayoutId());
         //初始化黄油刀控件绑定框架
         bind = ButterKnife.bind(this);
-        //初始化
-        init();
         //动态权限
         requestPermissions();
+        //初始化操作
+        onCreateNext(savedInstanceState);
+    }
+
+    private void onCreateNext(Bundle savedInstanceState) {
+        //初始化
+        init();
         //初始化控件
         initViews(savedInstanceState);
         //初始化监听
@@ -130,6 +97,42 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
     protected abstract void initListener();
 
     protected abstract void initData();
+
+
+    //rx生命周期管控
+    private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
+
+    @Override
+    @NonNull
+    @CheckResult
+    public final Observable<ActivityEvent> lifecycle() {
+        return lifecycleSubject.asObservable();
+    }
+
+    @Override
+    @NonNull
+    @CheckResult
+    public final <P> LifecycleTransformer<P> bindUntilEvent(@NonNull ActivityEvent event) {
+        return RxLifecycle.bindUntilEvent(lifecycleSubject, event);
+    }
+
+    @Override
+    @NonNull
+    @CheckResult
+    public final <P> LifecycleTransformer<P> bindToLifecycle() {
+        return RxLifecycleAndroid.bindActivity(lifecycleSubject);
+    }
+
+
+    private void setupMvp() {
+        try {
+            mPresenter = ((Class<T>) ((ParameterizedType) (getClass().getGenericSuperclass())).getActualTypeArguments()[1]).newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+            new NullPointerException("mPresenter实例化失败");
+        }
+        mPresenter.attach((V) this);
+    }
 
     //==========================等待框start==========================
     ProgressDialog mProgressDialog;
@@ -177,32 +180,32 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
 
     //========================rx相关start===============================
     @Override
-    public void doOnStart() {
+    public void doOnStart(int requestCode) {
         showProgressBar();
         LogUtils.d("任务开始了");
     }
 
     @Override
-    public void doOnCancel() {
+    public void doOnCancel(int requestCode) {
         hideProgressBar();
         LogUtils.d("任务取消了");
     }
 
     @Override
-    public LifecycleTransformer bindLifecycle(Class clazz) {
+    public LifecycleTransformer bindLifecycle(int requestCode) {
         return this.bindToLifecycle();
     }
 
 
     @Override
-    public void doOnError(String msg) {
+    public void doOnError(int requestCode, String msg) {
         hideProgressBar();
         toast(msg);
         LogUtils.d("任务出现错误了");
     }
 
     @Override
-    public void onCompleted() {
+    public void onCompleted(int requestCode) {
         hideProgressBar();
         LogUtils.d("任务完成了");
     }
@@ -221,7 +224,6 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.onResume();
         lifecycleSubject.onNext(ActivityEvent.RESUME);
         LogUtils.d(TAG + "onResume");
     }
@@ -230,7 +232,6 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
     protected void onPause() {
         lifecycleSubject.onNext(ActivityEvent.PAUSE);
         super.onPause();
-        mPresenter.onPause();
         LogUtils.d(TAG + "onPause");
     }
 
@@ -238,7 +239,6 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
     protected void onStop() {
         lifecycleSubject.onNext(ActivityEvent.STOP);
         super.onStop();
-        mPresenter.onStop();
         LogUtils.d(TAG + "onStop");
     }
 
@@ -247,8 +247,7 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenterIm
         bind.unbind();
         LogUtils.d(TAG + "onDestroy");
         lifecycleSubject.onNext(ActivityEvent.DESTROY);
-        mPresenter.detachView();
-        mPresenter.onDestroy();
+        mPresenter.destroy();
         super.onDestroy();
     }
 

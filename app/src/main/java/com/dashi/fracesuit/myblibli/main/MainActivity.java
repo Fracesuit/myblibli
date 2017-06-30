@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.dashi.fracesuit.commonlibs.base.mvp.BaseActivity;
+import com.dashi.fracesuit.commonlibs.base.CommonActivity;
 import com.dashi.fracesuit.myblibli.R;
 import com.dashi.fracesuit.myblibli.hotfix.bottombar.BaseAdapter;
 import com.dashi.fracesuit.myblibli.hotfix.bottombar.BottomBar;
@@ -25,7 +25,7 @@ import butterknife.BindView;
  * 邮箱 784787081@qq.com
  */
 
-public class MainActivity extends BaseActivity<MainContract.MainView, MainPresenter> implements MainContract.MainView {
+public class MainActivity extends CommonActivity<MainContract.MainView, MainPresenter> implements MainContract.MainView {
     @BindView(R.id.go)
     TextView go;
     @BindView(R.id.btn)
