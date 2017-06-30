@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">UserModule</string>
+    <string name="title_trouble">故障列表</string>
 </resources>

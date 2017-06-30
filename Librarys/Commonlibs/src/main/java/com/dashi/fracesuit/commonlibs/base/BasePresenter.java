@@ -1,9 +1,9 @@
 package com.dashi.fracesuit.commonlibs.base;
 
 
-import com.dashi.fracesuit.rxjava1x.interator.RxBaseView;
+import com.dashi.fracesuit.rxjava1x.interator.BaseView;
 
-public abstract class BasePresenter<V extends RxBaseView> {
+public abstract class BasePresenter<V extends BaseView> {
     protected V mView;
 
     protected void attach(V view) {

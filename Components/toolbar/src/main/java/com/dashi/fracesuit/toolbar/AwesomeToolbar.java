@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -86,20 +87,21 @@ public class AwesomeToolbar extends Toolbar {
     }
 
 
-    public AwesomeToolbar titleLeft(String title) {
-        setTitle(title);
+    public AwesomeToolbar titleLeft(@StringRes int titleResid) {
+        setTitle(context.getString(titleResid));
         //这个因为如果有导航按钮的时候,会出现title和naviation的距离太大
-        Drawable navigationIcon = getNavigationIcon();
+      /* Drawable navigationIcon = getNavigationIcon();
         if (navigationIcon != null) {
-            setContentInsetStartWithNavigation(0);
-        }
+
+        }*/
+        setContentInsetStartWithNavigation(0);
         setContentInsetsRelative(0, 0);
         setContentInsetsAbsolute(0, 0);
         return this;
     }
 
-    public AwesomeToolbar titleCenter(String title) {
-        titleLeft(title);
+    public AwesomeToolbar titleCenter(@StringRes int titleResid) {
+        titleLeft(titleResid);
         final AppCompatTextView textView = getTitleView();
         textView.setGravity(Gravity.CENTER);
         ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();

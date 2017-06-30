@@ -1,13 +1,19 @@
 package com.dashi.fracesuit.usermodule.modules.trouble;
 
 
-import com.dashi.fracesuit.commonlibs.base.list.BaseListActivity;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.dashi.fracesuit.usermodule.R;
+import com.dashi.fracesuit.usermodule.modules.baselist.BaseListActivity;
 
-/**
- * MVPPlugin
- * 邮箱 784787081@qq.com
- */
 
-public class TroubleActivity extends BaseListActivity<String,TroubleContract.TroubleView, TroublePresenter> implements TroubleContract.TroubleView {
+public class TroubleActivity extends BaseListActivity<Trouble, TroublePresenter> {
+    @Override
+    protected BaseQuickAdapter getAdapter() {
+        return new TrouibleAdapter(R.layout.item_trouble);
+    }
 
+    @Override
+    protected int getActivityTitle() {
+        return R.string.title_trouble;
+    }
 }

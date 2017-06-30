@@ -14,7 +14,7 @@ import com.dashi.fracesuit.commonlibs.R;
 import com.dashi.fracesuit.commonlibs.utils.ToastUtils;
 import com.dashi.fracesuit.logger.LogUtils;
 import com.dashi.fracesuit.permissions.PermissionsHelp;
-import com.dashi.fracesuit.rxjava1x.interator.RxBaseView;
+import com.dashi.fracesuit.rxjava1x.interator.BaseView;
 import com.dashi.fracesuit.toolbar.AwesomeToolbar;
 import com.trello.rxlifecycle.LifecycleProvider;
 import com.trello.rxlifecycle.LifecycleTransformer;
@@ -33,8 +33,8 @@ import rx.subjects.BehaviorSubject;
  * Created by Fracesuit on 2017/6/29.
  */
 
-public abstract class BaseActivity<V extends RxBaseView, T extends BasePresenter<V>> extends AppCompatActivity implements LifecycleProvider<ActivityEvent>, RxBaseView {
-    private final String TAG = this.getClass().getSimpleName();
+public abstract class BaseActivity<V extends BaseView, T extends BasePresenter<V>> extends AppCompatActivity implements LifecycleProvider<ActivityEvent>, BaseView {
+    public final String TAG = this.getClass().getSimpleName();
 
     //公共view
     public AwesomeToolbar toolbar;
@@ -188,11 +188,11 @@ public abstract class BaseActivity<V extends RxBaseView, T extends BasePresenter
     @Override
     public void doOnCancel(int requestCode) {
         hideProgressBar();
-        LogUtils.d("任务取消了");
+        LogUtils.d("任务释放了");
     }
 
     @Override
-    public LifecycleTransformer bindLifecycle(int requestCode) {
+    public LifecycleTransformer doBindLifecycle(int requestCode) {
         return this.bindToLifecycle();
     }
 
@@ -205,7 +205,7 @@ public abstract class BaseActivity<V extends RxBaseView, T extends BasePresenter
     }
 
     @Override
-    public void onCompleted(int requestCode) {
+    public void doOnCompleted(int requestCode) {
         hideProgressBar();
         LogUtils.d("任务完成了");
     }
@@ -244,10 +244,10 @@ public abstract class BaseActivity<V extends RxBaseView, T extends BasePresenter
 
     @Override
     protected void onDestroy() {
-        bind.unbind();
         LogUtils.d(TAG + "onDestroy");
         lifecycleSubject.onNext(ActivityEvent.DESTROY);
         mPresenter.destroy();
+        bind.unbind();
         super.onDestroy();
     }
 

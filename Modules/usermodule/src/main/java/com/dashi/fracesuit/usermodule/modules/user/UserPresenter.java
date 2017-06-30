@@ -1,7 +1,7 @@
 package com.dashi.fracesuit.usermodule.modules.user;
 
 import com.dashi.fracesuit.commonlibs.base.BasePresenter;
-import com.dashi.fracesuit.commonlibs.base.BaseView;
+import com.dashi.fracesuit.rxjava1x.interator.BaseView;
 import com.dashi.fracesuit.rxjava1x.interator.DefaultSubscriber;
 import com.dashi.fracesuit.usermodule.data.repository.User2Repository;
 import com.dashi.fracesuit.usermodule.data.repository.UserRepository;
@@ -15,7 +15,7 @@ import com.dashi.fracesuit.usermodule.modle.User2;
  * MVPPlugin
  */
 
-public class UserPresenter extends BasePresenter<BaseView<>> {
+public class UserPresenter extends BasePresenter<BaseView> {
     private UserInterator userInterator;
     private User2Interator user2Interator;
 
@@ -33,7 +33,7 @@ public class UserPresenter extends BasePresenter<BaseView<>> {
         userInterator.execute(new DefaultSubscriber<User>(mView, 100) {
             @Override
             public void onNext(User user) {
-                mView.parseData(user);
+                mView.doParseData(100, user);
             }
         }, null);
     }

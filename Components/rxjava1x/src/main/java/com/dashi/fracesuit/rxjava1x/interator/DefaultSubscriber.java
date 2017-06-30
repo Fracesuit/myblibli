@@ -17,10 +17,10 @@ import rx.Subscriber;
  */
 
 public abstract class DefaultSubscriber<T> extends Subscriber<T> {
-    RxBaseView mView;
+    BaseView mView;
     int mRequestCode;
 
-    public DefaultSubscriber(@NonNull RxBaseView view, int requestCode) {
+    public DefaultSubscriber(@NonNull BaseView view, int requestCode) {
         mView = view;
         mRequestCode = requestCode;
     }
@@ -38,7 +38,7 @@ public abstract class DefaultSubscriber<T> extends Subscriber<T> {
 
     protected LifecycleTransformer<T> bindLifecycle()//绑定生命周期,获取泛型的实际类型
     {
-        return mView.bindLifecycle(mRequestCode);
+        return mView.doBindLifecycle(mRequestCode);
     }
 
     protected void doOnError(Throwable e, String msg)//错误的时候
@@ -48,7 +48,7 @@ public abstract class DefaultSubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onCompleted() {
-        mView.onCompleted(mRequestCode);
+        mView.doOnCompleted(mRequestCode);
     }
 
 

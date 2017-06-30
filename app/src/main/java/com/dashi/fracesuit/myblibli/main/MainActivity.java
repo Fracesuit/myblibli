@@ -8,13 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.dashi.fracesuit.commonlibs.base.CommonActivity;
+import com.dashi.fracesuit.commonlibs.base.BaseActivity;
 import com.dashi.fracesuit.myblibli.R;
 import com.dashi.fracesuit.myblibli.hotfix.bottombar.BaseAdapter;
 import com.dashi.fracesuit.myblibli.hotfix.bottombar.BottomBar;
 import com.dashi.fracesuit.myblibli.hotfix.bottombar.BottomBarTab;
 import com.dashi.fracesuit.myblibli.hotfix.bottombar.OnBottomTabSelectedListener;
 import com.dashi.fracesuit.permissions.PermissionsHelp;
+import com.dashi.fracesuit.rxjava1x.interator.BaseView;
 import com.dashi.fracesuit.usermodule.modules.user.UserActivity;
 
 import butterknife.BindView;
@@ -25,7 +26,7 @@ import butterknife.BindView;
  * 邮箱 784787081@qq.com
  */
 
-public class MainActivity extends CommonActivity<MainContract.MainView, MainPresenter> implements MainContract.MainView {
+public class MainActivity extends BaseActivity<BaseView, MainPresenter> {
     @BindView(R.id.go)
     TextView go;
     @BindView(R.id.btn)
@@ -85,7 +86,7 @@ public class MainActivity extends CommonActivity<MainContract.MainView, MainPres
     @Override
     protected void initToolBar() {
         toolbar.supportBack()
-                .titleCenter("dd")
+                .titleCenter(R.string.app_name)
                 .inflateMenu(R.menu.menu);
     }
 
@@ -134,4 +135,8 @@ public class MainActivity extends CommonActivity<MainContract.MainView, MainPres
                 .addItem(new BottomBarTab(this, R.mipmap.ic_launcher, "系统设置"));
     }
 
+    @Override
+    public void doParseData(int requestCode, Object data) {
+
+    }
 }

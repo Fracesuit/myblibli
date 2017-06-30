@@ -2,7 +2,7 @@ package com.dashi.fracesuit.usermodule.domain.interator;
 
 
 import com.dashi.fracesuit.rxjava1x.interator.BaseInteractor;
-import com.dashi.fracesuit.usermodule.domain.repository.IUserRepository;
+import com.dashi.fracesuit.usermodule.domain.repository.BaseRepository;
 import com.dashi.fracesuit.usermodule.modle.User;
 
 import rx.Observable;
@@ -12,14 +12,14 @@ import rx.Observable;
  */
 
 public class UserInterator extends BaseInteractor<User, Void> {
-    IUserRepository userRepository;
+    BaseRepository userRepository;
 
-    public UserInterator(IUserRepository userRepository) {
+    public UserInterator(BaseRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
     protected Observable<User> buildObservable(Void param) {
-        return userRepository.getUser();
+        return userRepository.requestData(param);
     }
 }

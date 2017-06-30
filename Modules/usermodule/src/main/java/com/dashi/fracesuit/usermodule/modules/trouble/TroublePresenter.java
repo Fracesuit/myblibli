@@ -1,14 +1,17 @@
 package com.dashi.fracesuit.usermodule.modules.trouble;
 
-import android.content.Context;
+import com.dashi.fracesuit.rxjava1x.interator.BaseInteractor;
+import com.dashi.fracesuit.usermodule.data.repository.TroubleRepository;
+import com.dashi.fracesuit.usermodule.domain.interator.TroubleInterator;
+import com.dashi.fracesuit.usermodule.modules.baselist.BaseListPresenter;
 
-import com.dashi.fracesuit.usermodule.modules.mvp.BasePresenterImpl;
+import java.util.List;
+import java.util.Map;
 
-/**
- * MVPPlugin
- *  邮箱 784787081@qq.com
- */
 
-public class TroublePresenter extends BasePresenterImpl<TroubleContract.View> implements TroubleContract.Presenter{
-    
+public class TroublePresenter extends BaseListPresenter<Trouble> {
+    @Override
+    public BaseInteractor<List<Trouble>, Map<String, String>> getInterator() {
+        return new TroubleInterator(new TroubleRepository());
+    }
 }

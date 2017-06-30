@@ -1,13 +1,9 @@
 package com.dashi.fracesuit.myblibli.main;
 
 import com.dashi.fracesuit.commonlibs.base.BasePresenter;
+import com.dashi.fracesuit.rxjava1x.interator.BaseView;
 
 
-/**
- * MVPPlugin
- *  邮箱 784787081@qq.com
- */
+public class MainPresenter extends BasePresenter<BaseView> {
 
-public class MainPresenter extends BasePresenter<MainContract.MainView> implements MainContract.Presenter{
-    
 }

@@ -8,12 +8,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.dashi.fracesuit.commonlibs.base.BaseActivity;
+import com.dashi.fracesuit.rxjava1x.interator.BaseView;
 import com.dashi.fracesuit.usermodule.R;
 import com.dashi.fracesuit.usermodule.R2;
-import com.dashi.fracesuit.usermodule.modle.User;
-import com.dashi.fracesuit.usermodule.modle.User2;
-import com.trello.rxlifecycle.LifecycleTransformer;
-import com.trello.rxlifecycle.android.ActivityEvent;
 
 import butterknife.BindView;
 
@@ -22,7 +19,7 @@ import butterknife.BindView;
  * 邮箱 784787081@qq.com
  */
 
-public class UserActivity extends BaseActivity<UserContract.UserView, UserPresenter> implements UserContract.UserView, View.OnClickListener {
+public class UserActivity extends BaseActivity<BaseView, UserPresenter> implements View.OnClickListener {
     @BindView(R2.id.tv_name)
     TextView tvName;
 
@@ -53,25 +50,6 @@ public class UserActivity extends BaseActivity<UserContract.UserView, UserPresen
         btnCncel1.setText("dddef");
     }
 
-    @Override
-    public LifecycleTransformer bindLifecycle(Class clazz) {
-        if (User.class == clazz) {
-            return this.bindUntilEvent(ActivityEvent.DESTROY);
-        } else if (User2.class == clazz) {
-            return super.bindLifecycle(clazz);
-        } else {
-            return this.bindToLifecycle();
-        }
-        // return this.bindUntilEvent(ActivityEvent.DESTROY);
-        //return this.bindLifecycle(clazz);
-        //return this.bindToLifecycle();
-    }
-    /*@Override
-    public LifecycleTransformer bindLifecycle() {
-        // return this.bindUntilEvent(ActivityEvent.DESTROY);
-        //return this.bindLifecycle(clazz);
-        return this.bindToLifecycle();
-    }*/
 
     @Override
     @LayoutRes
@@ -100,17 +78,6 @@ public class UserActivity extends BaseActivity<UserContract.UserView, UserPresen
     }
 
     @Override
-    public void getUserSuccess(User user) {
-        tvName.setText(user.getName());
-        tvAge.setText(user.getAge());
-    }
-
-    @Override
-    public void getUser2Success(User2 user) {
-
-    }
-
-    @Override
     protected void cancelTask() {
         super.cancelTask();
         mPresenter.cancel();
@@ -131,4 +98,8 @@ public class UserActivity extends BaseActivity<UserContract.UserView, UserPresen
         }
     }
 
+    @Override
+    public void doParseData(int requestCode, Object data) {
+
+    }
 }

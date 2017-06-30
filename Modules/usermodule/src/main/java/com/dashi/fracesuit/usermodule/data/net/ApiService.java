@@ -7,7 +7,7 @@ import com.dashi.fracesuit.commonlibs.constant.CommContants;
  * Created by Fracesuit on 2017/5/23.
  */
 
-public class UserApiService {
+public class ApiService {
     private static AppApi api;
 
     public static synchronized AppApi instance() {
